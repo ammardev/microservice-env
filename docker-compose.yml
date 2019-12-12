@@ -137,6 +137,7 @@ services:
         - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
         - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
         - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
+        - ./nginx/services:/etc/nginx/sites-available/microservices
         - ./nginx/conf:/etc/nginx/conf
 
       ports:
@@ -191,7 +192,7 @@ services:
         - php-fpm
       networks:
         - backend
-        
+
 ### Beanstalkd Console ###################################
     beanstalkd-console:
       build: ./beanstalkd-console
