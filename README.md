@@ -47,6 +47,3 @@ Then you should restart nginx container using the following command:
 ```
 docker-compose restart nginx
 ```
-
-# Known Issues
-There is a problem with the SSL Certification and Nginx. And I'm already working to fix it.
