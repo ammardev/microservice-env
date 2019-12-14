@@ -6,8 +6,12 @@ COPY nginx.conf /etc/nginx/
 
 RUN apk update \
     && apk upgrade \
-    && apk add --no-cache bash \
+    && apk add --no-cache bash openssl \
     && adduser -D -H -u 1000 -s /bin/bash www-data -G www-data
+
+RUN openssl req -x509 -nodes -days 365 -subj "/C=JO/O=Luqta, Inc./CN=luqta.local" -addext \
+"subjectAltName=DNS:luqta.local" -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt;
+
 
 ARG PHP_UPSTREAM_CONTAINER=php-fpm
 ARG PHP_UPSTREAM_PORT=9000
