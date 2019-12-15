@@ -363,6 +363,11 @@ RUN if [ ${INSTALL_IMAP} = true ]; then \
     docker-php-ext-install imap \
 ;fi
 
+RUN curl -s http://getcomposer.org/installer | php && \
+  echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc && \
+  mv composer.phar /usr/local/bin/composer
+
+
 ###########################################################################
 # Check PHP version:
 ###########################################################################
