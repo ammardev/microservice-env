@@ -8,10 +8,12 @@ read ans;
 service_folder_name=${ans};
 
 echo -e "\nStart installing new lumen service...\n";
-project_dir=../src/${service_folder_name}
-git clone https://github.com/3bdullahg97/lumen-mongodb.git ${project_dir};
+cd "../src/";
+git clone "https://github.com/3bdullahg97/lumen-mongodb.git" ${service_folder_name};
 
-mv ${project_dir}/.env.example ${project_dir}/.env;
+mv "${service_folder_name}/.env.example" "${service_folder_name}/.env";
+
+cd "../docker/";
 docker-compose exec php bash -c "cd ${service_folder_name} && composer install && php artisan key:generate"
 
 echo -en "\nInsert service path name: ";
