@@ -54,31 +54,6 @@ RUN if [ ${INSTALL_SOAP} = true ]; then \
 ;fi
 
 ###########################################################################
-# pgsql
-###########################################################################
-
-ARG INSTALL_PGSQL=false
-
-RUN if [ ${INSTALL_PGSQL} = true ]; then \
-    # Install the pgsql extension
-    docker-php-ext-install pgsql \
-;fi
-
-###########################################################################
-# pgsql client
-###########################################################################
-
-ARG INSTALL_PG_CLIENT=false
-
-RUN if [ ${INSTALL_PG_CLIENT} = true ]; then \
-    # Create folders if not exists (https://github.com/tianon/docker-brew-debian/issues/65)
-    mkdir -p /usr/share/man/man1 && \
-    mkdir -p /usr/share/man/man7 && \
-    # Install the pgsql client
-    apt-get install -y postgresql-client \
-;fi
-
-###########################################################################
 # xDebug:
 ###########################################################################
 
