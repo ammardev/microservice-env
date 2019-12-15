@@ -51,7 +51,7 @@ RUN if [ ${INSTALL_SOAP} = true ]; then \
     apt-get update -yqq && \
     apt-get -y install libxml2-dev php-soap && \
     docker-php-ext-install soap \
-;fi
+    ;fi
 
 ###########################################################################
 # xDebug:
@@ -63,7 +63,7 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
     # Install the xdebug extension
     pecl install xdebug && \
     docker-php-ext-enable xdebug \
-;fi
+    ;fi
 
 # Copy xdebug configuration for remote debugging
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
@@ -80,7 +80,7 @@ RUN if [ ${INSTALL_XDEBUG} = false -a ${INSTALL_BLACKFIRE} = true ]; then \
     && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
     && mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
     && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini \
-;fi
+    ;fi
 
 ###########################################################################
 # PHP REDIS EXTENSION
@@ -93,7 +93,7 @@ RUN if [ ${INSTALL_PHPREDIS} = true ]; then \
     printf "\n" | pecl install -o -f redis \
     &&  rm -rf /tmp/pear \
     &&  docker-php-ext-enable redis \
-;fi
+    ;fi
 
 ###########################################################################
 # Swoole EXTENSION
@@ -105,7 +105,7 @@ RUN if [ ${INSTALL_SWOOLE} = true ]; then \
     # Install Php Swoole Extension
     pecl install swoole \
     &&  docker-php-ext-enable swoole \
-;fi
+    ;fi
 
 ###########################################################################
 # MongoDB:
@@ -117,7 +117,7 @@ RUN if [ ${INSTALL_MONGO} = true ]; then \
     # Install the mongodb extension
     pecl install mongodb && \
     docker-php-ext-enable mongodb \
-;fi
+    ;fi
 
 ###########################################################################
 # AMQP:
@@ -130,7 +130,7 @@ RUN if [ ${INSTALL_AMQP} = true ]; then \
     # Install the amqp extension
     pecl install amqp && \
     docker-php-ext-enable amqp \
-;fi
+    ;fi
 
 ###########################################################################
 # ZipArchive:
@@ -141,7 +141,7 @@ ARG INSTALL_ZIP_ARCHIVE=false
 RUN if [ ${INSTALL_ZIP_ARCHIVE} = true ]; then \
     # Install the zip extension
     docker-php-ext-install zip \
-;fi
+    ;fi
 
 ###########################################################################
 # bcmath:
@@ -152,7 +152,7 @@ ARG INSTALL_BCMATH=false
 RUN if [ ${INSTALL_BCMATH} = true ]; then \
     # Install the bcmath extension
     docker-php-ext-install bcmath \
-;fi
+    ;fi
 
 ###########################################################################
 # GMP (GNU Multiple Precision):
@@ -162,9 +162,9 @@ ARG INSTALL_GMP=false
 
 RUN if [ ${INSTALL_GMP} = true ]; then \
     # Install the GMP extension
-	apt-get install -y libgmp-dev && \
+    apt-get install -y libgmp-dev && \
     docker-php-ext-install gmp \
-;fi
+    ;fi
 
 ###########################################################################
 # PHP Memcached:
@@ -178,16 +178,16 @@ RUN if [ ${INSTALL_MEMCACHED} = true ]; then \
     && mkdir -p memcached \
     && tar -C memcached -zxvf /tmp/memcached.tar.gz --strip 1 \
     && ( \
-        cd memcached \
-        && phpize \
-        && ./configure \
-        && make -j$(nproc) \
-        && make install \
+    cd memcached \
+    && phpize \
+    && ./configure \
+    && make -j$(nproc) \
+    && make install \
     ) \
     && rm -r memcached \
     && rm /tmp/memcached.tar.gz \
     && docker-php-ext-enable memcached \
-;fi
+    ;fi
 
 ###########################################################################
 # Exif:
@@ -198,7 +198,7 @@ ARG INSTALL_EXIF=false
 RUN if [ ${INSTALL_EXIF} = true ]; then \
     # Enable Exif PHP extentions requirements
     docker-php-ext-install exif \
-;fi
+    ;fi
 
 ###########################################################################
 # PHP Aerospike:
@@ -216,14 +216,14 @@ RUN if [ ${INSTALL_AEROSPIKE} = true ]; then \
     && mkdir -p aerospike-client-php \
     && tar -C aerospike-client-php -zxvf /tmp/aerospike-client-php.tar.gz --strip 1 \
     && ( \
-        cd aerospike-client-php/src \
-        && phpize \
-        && ./build.sh \
-        && make install \
+    cd aerospike-client-php/src \
+    && phpize \
+    && ./build.sh \
+    && make install \
     ) \
     && rm /tmp/aerospike-client-php.tar.gz \
     && docker-php-ext-enable aerospike \
-;fi
+    ;fi
 
 ###########################################################################
 # Opcache:
@@ -233,7 +233,7 @@ ARG INSTALL_OPCACHE=false
 
 RUN if [ ${INSTALL_OPCACHE} = true ]; then \
     docker-php-ext-install opcache \
-;fi
+    ;fi
 
 # Copy opcache configration
 COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
@@ -246,7 +246,7 @@ ARG INSTALL_MYSQLI=false
 
 RUN if [ ${INSTALL_MYSQLI} = true ]; then \
     docker-php-ext-install mysqli \
-;fi
+    ;fi
 
 ###########################################################################
 # Tokenizer Modifications:
@@ -256,7 +256,7 @@ ARG INSTALL_TOKENIZER=false
 
 RUN if [ ${INSTALL_TOKENIZER} = true ]; then \
     docker-php-ext-install tokenizer \
-;fi
+    ;fi
 
 ###########################################################################
 # Human Language and Character Encoding Support:
@@ -270,7 +270,7 @@ RUN if [ ${INSTALL_INTL} = true ]; then \
     apt-get install -y zlib1g-dev libicu-dev g++ && \
     docker-php-ext-configure intl && \
     docker-php-ext-install intl \
-;fi
+    ;fi
 
 ###########################################################################
 # GHOSTSCRIPT:
@@ -284,7 +284,7 @@ RUN if [ ${INSTALL_GHOSTSCRIPT} = true ]; then \
     apt-get install -y \
     poppler-utils \
     ghostscript \
-;fi
+    ;fi
 
 ###########################################################################
 # LDAP:
@@ -296,7 +296,7 @@ RUN if [ ${INSTALL_LDAP} = true ]; then \
     apt-get install -y libldap2-dev && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
     docker-php-ext-install ldap \
-;fi
+    ;fi
 
 ###########################################################################
 # SQL SERVER:
@@ -322,7 +322,7 @@ RUN set -eux; if [ ${INSTALL_MSSQL} = true ]; then \
     && docker-php-ext-enable pdo_sqlsrv sqlsrv \
     && php -m | grep -q 'pdo_sqlsrv' \
     && php -m | grep -q 'sqlsrv' \
-;fi
+    ;fi
 
 ###########################################################################
 # Image optimizers:
@@ -334,7 +334,7 @@ ARG INSTALL_IMAGE_OPTIMIZERS=false
 
 RUN if [ ${INSTALL_IMAGE_OPTIMIZERS} = true ]; then \
     apt-get install -y --force-yes jpegoptim optipng pngquant gifsicle \
-;fi
+    ;fi
 
 ###########################################################################
 # ImageMagick:
@@ -348,7 +348,7 @@ RUN if [ ${INSTALL_IMAGEMAGICK} = true ]; then \
     apt-get install -y libmagickwand-dev imagemagick && \
     pecl install imagick && \
     docker-php-ext-enable imagick \
-;fi
+    ;fi
 
 ###########################################################################
 # IMAP:
@@ -361,11 +361,11 @@ RUN if [ ${INSTALL_IMAP} = true ]; then \
     rm -r /var/lib/apt/lists/* && \
     docker-php-ext-configure imap --with-kerberos --with-imap-ssl && \
     docker-php-ext-install imap \
-;fi
+    ;fi
 
 RUN curl -s http://getcomposer.org/installer | php && \
-  echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc && \
-  mv composer.phar /usr/local/bin/composer
+    echo "export PATH=${PATH}:/var/www/vendor/bin" >> ~/.bashrc && \
+    mv composer.phar /usr/local/bin/composer
 
 
 ###########################################################################
@@ -392,7 +392,13 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     rm /var/log/lastlog /var/log/faillog
 
-RUN usermod -u 1000 www-data
+# Solve permissions problems #########################################
+RUN userdel www-data
+RUN useradd -m www-data -u 1000
+RUN chown www-data:www-data /var/www
+USER www-data
+######################################################################
+
 
 WORKDIR /var/www
 
