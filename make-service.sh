@@ -14,7 +14,7 @@ git clone "https://github.com/3bdullahg97/lumen-mongodb.git" ${service_folder_na
 mv "${service_folder_name}/.env.example" "${service_folder_name}/.env";
 
 cd "../docker/";
-docker-compose exec php bash -c "cd ${service_folder_name} && composer install && php artisan key:generate"
+docker-compose exec php bash -c "cd ${service_folder_name} && composer install"
 
 echo -en "\nInsert service path name: ";
 read ans;
@@ -24,4 +24,7 @@ template="$(cat ./nginx/service-template.conf)";
 
 GREEN='\033[0;32m'
 eval "echo \"${template}\" >> ./nginx/services/\"${service_folder_name}\".conf" &&
- echo -e "\n${GREEN}Service created! You need to restart nginx."
+
+docker-compose restart nginx
+
+echo -e "\n${GREEN}Service created!"
