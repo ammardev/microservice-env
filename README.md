@@ -34,7 +34,14 @@ For more information about `docker-compose` usage checkout the [reference](https
 Or you can read [these articles to learn about Docker (Arabic)](https://3alam.pro/3mmarg97/series/introduction-to-docker/)
 
 # Creating New Services
-You can define your new services in nginx without editing nginx configuration files. simply run `make-service.sh` bash script:
+This is a command that create new microservices in the project. The new microservice folder will be placed in `src` directory. Make sure that the directory is created with the right permissions so that the script can create project without any problems.
+
+This command will do the following things:
+* Creates a new lumen project [from this boilerplate](https://github.com/3bdullahg97/lumen-mongodb).
+* Running `composer install` from inside `php` container.
+* Creates an Nginx configuration so that the new service can work with Nginx.
+* It will restart Nginx container automatically. So you don't have to do it by yourself.
+
 ```
 ./make-service.sh
 ```
@@ -42,8 +49,3 @@ Then you will have to choose the microservice folder name in the `src` directory
 
 ![image](https://user-images.githubusercontent.com/16087389/70798497-c502d180-1daf-11ea-809f-7e559403328f.png)
 
-
-Then you should restart nginx container using the following command:
-```
-docker-compose restart nginx
-```
