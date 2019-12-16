@@ -14,7 +14,7 @@ git clone "https://github.com/3bdullahg97/lumen-mongodb.git" ${service_folder_na
 mv "${service_folder_name}/.env.example" "${service_folder_name}/.env";
 
 cd "../docker/";
-docker-compose exec php bash -c "cd ${service_folder_name} && composer install"
+docker-compose exec php bash -c "cd ${service_folder_name} && composer install && php artisan key:generate"
 
 echo -en "\nInsert service path name: ";
 read ans;
