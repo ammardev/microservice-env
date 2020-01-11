@@ -19,8 +19,6 @@ parser.add_argument('url_path', help='The path of the service in the Nginx confi
 
 args = parser.parse_args()
 
-print(args)
-
 if(args.use_boilerplate):
     newLumenProject(args.folder_name)
 
