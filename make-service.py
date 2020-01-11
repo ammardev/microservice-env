@@ -8,7 +8,7 @@ def newLumenProject(folder_name):
     'cd ' + folder_name + ' && composer install && php artisan key:generate'], cwd='../docker/')
 
 def generateMicroserviceNginxConfig(folder, path):
-    subprocess.run(['bash', 'template-inject.sh', folder, path])
+    subprocess.run(['bash', 'microservice-template-inject.sh', folder, path])
 
 parser = argparse.ArgumentParser(description='This program will generate Nginx configuration for your microservices.')
 
