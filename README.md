@@ -43,9 +43,18 @@ This command will do the following things:
 * It will restart Nginx container automatically. So you don't have to do it by yourself.
 
 ```
-./make-service.sh
+python make-service.py -b folder path
 ```
-Then you will have to choose the microservice folder name in the `src` directory. And the path that the servece will serve on it as shown in the image:
 
-![image](https://user-images.githubusercontent.com/16087389/70798497-c502d180-1daf-11ea-809f-7e559403328f.png)
+Make service command takes two arguments. The first is the folder name in the src directory.
+And the second is the path that will be used in the Nginx configuration file.
+If you don't use `-b` flag, boilerplate won't be created. And the script will assume that the folder exists in src directory.
 
+# Generate SSL certificate
+After running containers. You can use `generate-ssl` command which is used to generate a new SSL certificate. The command will also
+add the renew command to the cronjob and restart Nginx container.
+```
+./generate-ssl example.com webmaster@example.com
+```
+
+Note that the domain used in the previous command should be same as server_name in default.conf.
