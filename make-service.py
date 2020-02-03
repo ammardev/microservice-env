@@ -47,3 +47,4 @@ else:
 
 
 subprocess.run(['docker-compose', 'restart', 'nginx'])
+subprocess.run(['docker-compose', 'restart', 'php'])
