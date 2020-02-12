@@ -105,6 +105,18 @@ services:
         - backend
 
 
+### MariaDB ##############################################
+    mysql:
+      image: mariadb
+      ports:
+        - "3306:3306"
+      volumes:
+        - ${DATA_PATH_HOST}/maria:/var/lib/mysql
+      environment:
+          MYSQL_ROOT_PASSWORD: ma1riadb6imp4ortol5dlq
+      networks:
+        - backend
+
 ### Redis ################################################
     redis:
       build: ./redis
